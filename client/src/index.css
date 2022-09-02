@@ -4,3 +4,39 @@ body {
   margin: 0;
   font-family: "Montserrat", sans-serif !important;
 }
+
+button {
+  background-color: black !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
+  color: white !important;
+}
+
+input,
+textarea {
+  box-shadow: none !important;
+  outline: none !important;
+  border: solid 1px grey !important;
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.ant-spin {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.ant-btn-dashed {
+  background-color: white !important;
+  color: black !important;
+  border: 1px dashed black !important;
+  width: 200px !important;
+}
