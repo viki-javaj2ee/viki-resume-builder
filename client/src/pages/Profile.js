@@ -1,25 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import DefaultLayout from "../components/DefaultLayout";
-import { Button, Tabs } from "antd";
+import { Button, message, Spin, Tabs } from "antd";
 import PersonalInfo from "../components/PersonalInfo";
 import { Form } from "antd";
 import SkillsEducation from "../components/SkillsEducation";
 import ExperienceProjects from "../components/ExperienceProjects";
+import axios from "axios";
 
 function Profile() {
   const { TabPane } = Tabs;
-  const onChange = (key) => {
-    //console.log(key);
+  const [loading, setLoading] = useState(false);
+  const user = JSON.parse(localStorage.getItem("vikiresume-user"));
+
+  const onFinish = async (values) => {
+    setLoading(true);
+    try {
+      const result = await axios.post("/api/user/update", {
+        ...values,
+        _id: user._id,
+      });
+      localStorage.setItem("vikiresume-user", JSON.stringify(result.data));
+      setLoading(false);
+      message.success("Profile updated successfull.");
+    } catch (err) {
+      setLoading(false);
+      message.error("Profile update failed.");
+    }
   };
+
   return (
     <DefaultLayout>
+      {loading && <Spin size="large" />}
       <div className="update-profile">
-        <h2>Update Profile</h2>
-        <Form
-          layout="vertical"
-          onFinish={(values) => console.log("Values ----------- ", values)}
-        >
-          <Tabs defaultActiveKey="1" onChange={onChange}>
+        <h4>
+          <b>Update Profile</b>
+        </h4>
+        <hr />
+        <Form layout="vertical" onFinish={onFinish} initialValues={user}>
+          <Tabs defaultActiveKey="1">
             <TabPane tab="Personal Info" key="1">
               <PersonalInfo />
             </TabPane>

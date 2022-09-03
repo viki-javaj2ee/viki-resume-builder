@@ -61,11 +61,7 @@ function PersonalInfo() {
         </Form.Item>
       </div>
       <div className="col-md-12">
-        <Form.Item
-          name="carrierObjective"
-          label="Carrier Objecive"
-          rules={[{ required: true }]}
-        >
+        <Form.Item name="address" label="Address" rules={[{ required: true }]}>
           <TextArea />
         </Form.Item>
       </div>

@@ -2,6 +2,7 @@ import { Button, Dropdown, Menu } from "antd";
 import React from "react";
 import "../resources/css/defaultlayout.css";
 import { Link, useNavigate } from "react-router-dom";
+import { UserOutlined } from "@ant-design/icons";
 
 function DefaultLayout(props) {
   const user = JSON.parse(localStorage.getItem("vikiresume-user"));
@@ -33,12 +34,16 @@ function DefaultLayout(props) {
   return (
     <div className="layout">
       <div className="header">
-        <h1>Viki CV</h1>
+        <h1 onClick={() => navigate("/home")} style={{ cursor: "pointer" }}>
+          Viki CV
+        </h1>
         <Dropdown overlay={menu} placement="bottom">
-          <Button>{user.username}</Button>
+          <Button icon={<UserOutlined />}>{user.username}</Button>
         </Dropdown>
       </div>
-      <div className="content">{props.children}</div>
+      <div className="content" style={{ overflow: "scroll" }}>
+        {props.children}
+      </div>
     </div>
   );
 }
